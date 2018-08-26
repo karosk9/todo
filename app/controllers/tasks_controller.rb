@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :provide_task, only: [:edit, :update, :destroy]
 
   def index
-    @tasks = Task.all
+    @tasks = current_user.tasks
   end
 
   def new
@@ -36,7 +36,7 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:description, :completed)
+    params.require(:task).permit(:description, :completed).merge(user: current_user)
   end
 
   def provide_task
