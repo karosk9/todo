@@ -1,0 +1,13 @@
+%table.table.table-hover
+  =link_to 'new', new_task_path, class: 'btn btn-primary'
+  %thead-light
+    %tr
+      %th{:scope => "col"} Nr
+      %th{:scope => "col"} Description
+      %th{:scope => "col"} Completed
+  %tbody
+    -@tasks.each_with_index do |task, index|
+      %tr
+        %td= index+1
+        %td= task.description
+        %td= task.completed
