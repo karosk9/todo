@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :provide_task, only: [:edit, :update, :destroy]
+  before_action :provide_task, only: [:edit, :update, :destroy, :done, :undone]
 
   def index
     @tasks = current_user.tasks
@@ -32,6 +32,18 @@ class TasksController < ApplicationController
   def destroy
     @task.destroy
     redirect_to tasks_path, notice: 'Task was successfully deleted'
+  end
+
+  def done
+    @task.completed = true
+    @task.save!
+    redirect_to tasks_path
+  end
+
+  def undone
+    @task.completed = false
+    @task.save!
+    redirect_to tasks_path
   end
 
   private
