@@ -1,5 +1,5 @@
 %table.table.table-hover
-  =link_to 'new', new_task_path, class: 'btn btn-primary'
+  =link_to 'New', new_task_path, class: 'btn btn-primary'
   %thead-light
     %tr
       %th{:scope => "col"} Nr
@@ -10,4 +10,5 @@
       %tr
         %td= index+1
         %td= task.description
-        %td= task.completed
+        %td= done(task)
+        %td= render 'actions', model: task

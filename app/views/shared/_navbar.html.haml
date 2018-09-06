@@ -1,0 +1,16 @@
+%nav.navbar.navbar-expand-lg.navbar-dark.bg-dark
+  %a= link_to 'ToDo', root_path, class: 'navbar-brand'
+  %button.navbar-toggler{"aria-controls" => "navbarNav", "aria-expanded" => "false", "aria-label" => "Toggle navigation", "data-target" => "#navbarNav", "data-toggle" => "collapse", type: "button"}
+    %span.navbar-toggler-icon
+  #navbarNav.collapse.navbar-collapse
+    %ul.navbar-nav
+      %li.nav-item.active
+        =link_to 'About', '#', class: 'nav-link'
+        %span.sr-only (current)
+      %li.nav-item
+  - if current_user
+    %a.nav-link.disabled{href: edit_user_registration_path}= current_user.email
+    =link_to "Log out", destroy_user_session_path, method: :delete, class: 'btn btn-danger my-2 my-sm-0'
+  - else
+    =link_to 'Log in', new_user_session_path, class: 'btn btn-success my-2 my-sm-0'
+    =link_to 'Register', new_user_registration_path, class: 'btn btn-outline-success my-2 my-sm-0'

@@ -10,12 +10,8 @@
 
   <body>
     <div class='container'>
-      <% flash.each do |name, message| %>
-        <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
-          <%= message %>
-        </div>
-      <% end %>
-      
+      <%= render 'shared/navbar' %>
+      <%= render 'shared/messages' %>
       <%= yield %>
     </div>
   </body>
