@@ -1,6 +1,5 @@
 class TasksController < ApplicationController
   before_action :provide_task, only: [:edit, :update, :destroy, :done, :undone]
-  before_action :authenticate_user!
   
   def index
     @tasks = current_user.tasks
