@@ -50,6 +50,7 @@ group :development, :test do
   gem 'pry-byebug'
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'selenium-webdriver'
+  gem 'site_prism', '~> 2.9'
 end
 
 group :development do
