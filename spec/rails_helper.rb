@@ -1,4 +1,5 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
+require 'site_prism'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
@@ -7,6 +8,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
+require 'capybara'
 
 Capybara.register_driver :chrome do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)
@@ -24,7 +26,7 @@ end
 
 Capybara.javascript_driver = :headless_chrome
 
-Dir[Rails.root.join('spec', 'support', '**', '*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec', 'support', 'page_objects', '**', '*.rb')].each { |f| require f }
 
 
 # Add additional requires below this line. Rails is not loaded until this point!
@@ -108,4 +110,6 @@ RSpec.configure do |config|
   config.after :each do
     Warden.test_reset!
   end
+
+  config.include Devise::Test::IntegrationHelpers, type: :feature
 end
