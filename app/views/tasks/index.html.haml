@@ -1,14 +1,30 @@
+-@title='Todo list'
+%br
+  =link_to 'New', new_task_path, id: 'new_task', class: 'btn btn-primary'
+%br
+%hr
+%h4
+  Total ToDo:
+  = total_todo
+%h4
+  Done:
+  = already_done_tasks
+%br
 %table.table.table-hover
-  =link_to 'New', new_task_path, class: 'btn btn-primary'
   %thead-light
     %tr
       %th{:scope => "col"} Nr
       %th{:scope => "col"} Description
       %th{:scope => "col"} Completed
-  %tbody
+      %th{:scope => "col"} Created at
+      %th{:scope => "col"} Deadline
+      %th{:scope => "col"} Actions
+  %tbody{id: 'tasks'}
     -@tasks.each_with_index do |task, index|
-      %tr
+      %tr{id: "task_#{task.id}"}
         %td= index+1
-        %td= task.description
+        %td{class: 'description'}= task.description
         %td= done(task)
+        %td= created(task)
+        %td= deadline_time(task)
         %td= render 'actions', model: task
