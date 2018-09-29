@@ -18,6 +18,10 @@ module TasksHelper
     'in ' + distance_of_time_in_words(Date.today, task.deadline)
   end
 
+  def finish_time(task)
+    if task.completed? ? task.finished_at : 'in progress'
+  end
+
   def total_todo
     current_user.tasks.where(completed: false).count
   end

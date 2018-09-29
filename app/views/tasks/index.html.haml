@@ -14,17 +14,22 @@
   %thead-light
     %tr
       %th{:scope => "col"} Nr
-      %th{:scope => "col"} Description
+      %th{:scope => "col"} Title
+      %th{:scope => "col"} Content
       %th{:scope => "col"} Completed
       %th{:scope => "col"} Created at
       %th{:scope => "col"} Deadline
+      %th{:scope => "col"} Finished at
+
       %th{:scope => "col"} Actions
   %tbody{id: 'tasks'}
     -@tasks.each_with_index do |task, index|
       %tr{id: "task_#{task.id}"}
         %td= index+1
-        %td{class: 'description'}= task.description
+        %td{class: 'title'}= task.title
+        %td= task.content
         %td= done(task)
         %td= created(task)
         %td= deadline_time(task)
+        %td= finish_time(task)
         %td= render 'actions', model: task

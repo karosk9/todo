@@ -5,9 +5,9 @@ describe 'New Task' do
   let(:index_page) { IndexPage.new }
   let(:user) { create(:user, email: 'user@example.com') }
   let(:user2) { create(:user, email: 'user2@example.com') }
-  let!(:task) { create(:task, user: user, description: 'task 1') }
-  let!(:task2) { create(:task, user: user2, description: 'task 2') }
-  let!(:task3) { create(:task, user: user, description: 'task 3') }
+  let!(:task) { create(:task, user: user, title: 'task 1') }
+  let!(:task2) { create(:task, user: user2, title: 'task 2') }
+  let!(:task3) { create(:task, user: user, title: 'task 3') }
 
   before do
     login_as(user)
@@ -19,7 +19,7 @@ describe 'New Task' do
     expect(index_page.tasks.count).to eq(2)
     expect(index_page).to have_content(user.email)
     expect(index_page).to_not have_content(user2.email)
-    expect(index_page).to have_content(task.description)
-    expect(index_page).to_not have_content(task2.description)
+    expect(index_page).to have_content(task.title)
+    expect(index_page).to_not have_content(task2.title)
   end
 end
