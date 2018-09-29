@@ -48,6 +48,7 @@ group :development, :test do
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'chromedriver-helper'
   gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'selenium-webdriver'
   gem 'site_prism', '~> 2.9'
