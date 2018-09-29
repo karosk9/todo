@@ -9,4 +9,12 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, :avatar, :avatar_cache, :remove_avatar])
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :avatar, :avatar_cache, :remove_avatar])
   end
+
+  def after_sign_in_path_for(resource)
+    if current_user.first_name? && current_user.last_name?
+      '/'
+    else
+      edit_user_registration_path(current_user)
+    end
+  end
 end
