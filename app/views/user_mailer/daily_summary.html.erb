@@ -5,7 +5,7 @@
   Your summary for <%= Date.yesterday %>:
 </p>
 <p>
-Tasks done: <%= @user.tasks.where("Date(finished_at) = ?", 'today').count %>
+Tasks done: <%= @tasks_done.count %>
 <table class="table">
   <thead>
     <tr>
@@ -15,7 +15,7 @@ Tasks done: <%= @user.tasks.where("Date(finished_at) = ?", 'today').count %>
     </tr>
   </thead>
   <tbody id="tasks">
-    <% @user.tasks.where("Date(finished_at) = ?", 'today').each_with_index do |task, index| %>
+    <% @tasks_done.each_with_index do |task, index| %>
       <tr>
         <td>
           <%= index+1 %>
