@@ -1,5 +1,5 @@
 =simple_form_for(@task) do |f|
-  =f.input :title
-  =f.input :content
+  =f.input :title, placeholder: 'Title'
+  =f.input :content, placeholder: 'Content'
   =f.input :deadline
   =f.button :submit, id: 'create_task', class: 'btn btn-success'

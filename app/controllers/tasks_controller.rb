@@ -16,6 +16,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       redirect_to root_path, notice: 'Task was successfully created'
+      set_title_if_not_present
     else
       render :new
     end
@@ -36,6 +37,7 @@ class TasksController < ApplicationController
 
   def done
     @task.completed = true
+    @task.finished_at = @task.updated_at
     @task.save!
     redirect_to root_path
   end
@@ -53,6 +55,11 @@ class TasksController < ApplicationController
 
   def provide_task
     @task = Task.find(params[:id])
+  end
+
+  def set_title_if_not_present
+    @task.title = 'Unnamed task' unless @task.title?
+    @task.save!
   end
 
 end

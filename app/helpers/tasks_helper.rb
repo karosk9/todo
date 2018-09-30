@@ -19,7 +19,7 @@ module TasksHelper
   end
 
   def finish_time(task)
-    if task.completed? ? task.finished_at : 'in progress'
+    task.completed? ? (time_ago_in_words(task.updated_at) + ' ago') : 'in progress'
   end
 
   def total_todo
