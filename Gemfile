@@ -13,6 +13,7 @@ gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'mini_magick'
+gem 'sinatra', require: nil
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
