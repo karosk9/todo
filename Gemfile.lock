@@ -90,6 +90,9 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.4)
+    crono (1.1.2)
+      activerecord (>= 4.0)
+      activesupport (>= 4.0)
     database_cleaner (1.7.0)
     devise (4.5.0)
       bcrypt (~> 3.0)
@@ -280,6 +283,7 @@ DEPENDENCIES
   carrierwave (~> 1.0)
   chromedriver-helper
   coffee-rails (~> 4.2)
+  crono
   database_cleaner
   devise (~> 4.5)
   factory_bot_rails
