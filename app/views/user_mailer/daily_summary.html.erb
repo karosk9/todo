@@ -1,0 +1,32 @@
+<h2>
+  <%= "Dear #{@user.first_name} #{@user.last_name}" %>
+</h2>
+<p>
+  Your summary for <%= Date.yesterday %>:
+</p>
+<p>
+Tasks done: <%= @user.tasks.where("Date(finished_at) = ?", 'today').count %>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Nr</th>
+      <th scope="col">Title</th>
+      <th scope="col">Content</th>
+    </tr>
+  </thead>
+  <tbody id="tasks">
+    <% @user.tasks.where("Date(finished_at) = ?", 'today').each_with_index do |task, index| %>
+      <tr>
+        <td>
+          <%= index+1 %>
+        </td>
+        <td class="title">
+          <%= task.title %>
+        </td>
+        <td>
+          <%= task.content %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
