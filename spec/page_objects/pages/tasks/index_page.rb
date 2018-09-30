@@ -3,7 +3,7 @@ require 'rails_helper'
 class IndexPage < SitePrism::Page
   set_url '/'
 
-  elements :tasks, 'tbody#tasks td.description'
+  elements :tasks, 'tbody#tasks td.title'
   element :success_message, 'div#flash_success'
   element :new_task_button, 'a#new_task'
   element :edit_task_button, "a.edit_task"
@@ -16,9 +16,9 @@ class IndexPage < SitePrism::Page
                     :delete_task_button
 
 
-  def create(description)
+  def create(title)
     new_task_button.click
-    fill_in 'Description', with: description
+    fill_in 'Title', with: title
     click_button 'Create Task'
   end
 
@@ -26,9 +26,9 @@ class IndexPage < SitePrism::Page
     delete_task_button.click
   end
 
-  def edit(other_description)
+  def edit(other_title)
     edit_task_button.click
-    fill_in 'Description', with: other_description
+    fill_in 'Title', with: other_title
     click_button 'Update Task'
   end
 
