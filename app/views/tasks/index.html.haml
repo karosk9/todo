@@ -12,6 +12,9 @@
 %br
 =paginate @tasks, class: 'btn btn-primary'
 
+= form_tag tasks_update_selected_path do
+  =submit_tag 'Finish selected', name: 'finish', class: 'btn btn-success'
+  =submit_tag 'Remove selected', name: 'remove', class: 'btn btn-danger'
   %table.table.table-hover
     %thead-light
       %tr
