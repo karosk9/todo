@@ -10,7 +10,7 @@
   Done:
   = already_done_tasks
 %br
-=paginate @tasks, class: 'btn btn-primary'
+=paginate tasks, class: 'btn btn-primary'
 
 = form_tag tasks_update_selected_path do
   =submit_tag 'Finish selected', name: 'finish', class: 'btn btn-success'
@@ -29,7 +29,7 @@
 
         %th{:scope => "col"} Actions
     %tbody{id: 'tasks'}
-      -@tasks.each_with_index do |task, index|
+      -tasks.each_with_index do |task, index|
         %tr{id: "task_#{task.id}"}
           %td= check_box_tag 'task_ids[]', task.id, false, class: 'selectable'
           %td= index+1
