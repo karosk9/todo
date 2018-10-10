@@ -18,13 +18,26 @@ let(:user) { create(:user) }
       expect(page).to have_content('New Task')
     end
 
-    it 'Adds a new task' do
-      visit ('/tasks/new')
-      fill_in 'Title', with: 'Pay bills'
-      click_on ('Create Task')
-      expect(page).to have_current_path('/')
-      expect(page).to have_content('Task was successfully created')
-      expect(page).to have_content('Pay bills')
+    context 'Adds a new task' do
+      before { visit ('/tasks/new') }
+
+      after do
+        expect(page).to have_current_path('/')
+        expect(page).to have_content('Task was successfully created')
+      end
+
+      it 'has title and content' do
+        fill_in 'Title', with: 'Pay bills'
+        fill_in 'Content', with: 'The sooner the better'
+        click_on ('Create Task')
+        expect(page).to have_content('Pay bills')
+        expect(page).to have_content('The sooner the better')
+      end
+
+      it 'has not title' do
+        click_on ('Create Task')
+        expect(page).to have_content('Unnamed task')
+      end
     end
   end
 end
