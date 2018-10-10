@@ -1,4 +1,4 @@
-module TasksHelper
+module TaskHelper
   def done(task)
     if task.completed
       link_to 'Restore', undone_task_path(task), class: 'btn btn-success restore'

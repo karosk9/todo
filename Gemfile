@@ -7,11 +7,13 @@ end
 
 gem 'bootstrap', '~> 4.1', '>= 4.1.3'
 gem 'carrierwave', '~> 1.0'
+gem 'crono'
 gem 'devise', '~> 4.5'
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'mini_magick'
+gem 'sinatra', require: nil
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
@@ -59,6 +61,7 @@ end
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'
+  gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
