@@ -63,10 +63,4 @@ class TasksController < ApplicationController
   def set_title_if_not_present
     task.update!(title: 'Unnamed task') unless task.title?
   end
-
-  def set_title_if_not_present
-    @task.title = 'Unnamed task' unless @task.title?
-    @task.save!
-  end
-
 end

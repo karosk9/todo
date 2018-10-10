@@ -16,7 +16,7 @@ describe 'Authentication' do
     end
 
     context 'user has no first and last name' do
-      let(:user) { User.create(email: 'user@example.com', password: 'password') }
+      let!(:user) { User.create(email: 'user@example.com', password: 'password') }
 
       it 'redirects user to edit profile page' do
         visit new_user_session_path
