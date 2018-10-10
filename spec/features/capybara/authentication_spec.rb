@@ -12,6 +12,7 @@ describe 'Authentication' do
       expect(page).to have_current_path('/')
       expect(page).to have_content('Log out')
       expect(page).to have_selector('#flash_success', text: 'Logged in successfully.')
+      expect(page).to have_content("#{user.first_name} #{user.last_name}")
     end
 
     context 'user has no first and last name' do
@@ -25,13 +26,14 @@ describe 'Authentication' do
         expect(page).to have_current_path("/users/edit.#{user.id}")
         expect(page).to have_content('Log out')
         expect(page).to have_selector('#flash_success', text: 'Logged in successfully.')
+        expect(page).to have_content('Incognito user')
       end
-  end
+    end
   end
 
   context 'authenticated' do
     before(:each) do
-      login_as(user, scope: :user)
+      login_as(user)
     end
 
     it 'allows user to log out' do
