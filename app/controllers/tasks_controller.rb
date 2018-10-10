@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :provide_task, only: [:edit, :update, :destroy, :done, :undone]
 
   def index
-    @tasks = current_user.tasks
+    @tasks = current_user.tasks.order(created_at: :desc)
   end
 
   def new
@@ -16,6 +16,7 @@ class TasksController < ApplicationController
     @task = Task.new(task_params)
     if @task.save
       redirect_to root_path, notice: 'Task was successfully created'
+      set_title_if_not_present
     else
       render :new
     end
@@ -36,6 +37,7 @@ class TasksController < ApplicationController
 
   def done
     @task.completed = true
+    @task.finished_at = @task.updated_at
     @task.save!
     redirect_to root_path
   end
@@ -48,11 +50,16 @@ class TasksController < ApplicationController
 
   private
   def task_params
-    params.require(:task).permit(:description, :completed, :deadline).merge(user: current_user)
+    params.require(:task).permit(:title, :content, :completed, :deadline).merge(user: current_user)
   end
 
   def provide_task
     @task = Task.find(params[:id])
+  end
+
+  def set_title_if_not_present
+    @task.title = 'Unnamed task' unless @task.title?
+    @task.save!
   end
 
 end

@@ -9,7 +9,7 @@ let(:user) { create(:user) }
     before(:each) do
       login_as(user)
     end
-    
+
     it 'Enters New Task page' do
       visit ('/')
       expect(page).to have_content('New')
@@ -20,7 +20,7 @@ let(:user) { create(:user) }
 
     it 'Adds a new task' do
       visit ('/tasks/new')
-      fill_in 'Description', with: 'Pay bills'
+      fill_in 'Title', with: 'Pay bills'
       click_on ('Create Task')
       expect(page).to have_current_path('/')
       expect(page).to have_content('Task was successfully created')

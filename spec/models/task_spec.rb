@@ -5,7 +5,7 @@ describe 'Task', type: :model do
   let!(:task) { create(:task, user: user) }
 
   describe 'validations' do
-    it 'is not valid without description' do
+    it 'is not valid without title' do
       task = Task.new
       expect(task).to_not be_valid
     end
@@ -15,7 +15,7 @@ describe 'Task', type: :model do
       let!(:task) { create(:task, user: user) }
 
       it { expect(task).to be_valid }
-      it { expect(task).to validate_presence_of(:description) }
+      it { expect(task).to validate_presence_of(:title) }
     end
   end
 

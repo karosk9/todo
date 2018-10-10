@@ -4,10 +4,23 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
+    <%= f.input :first_name,
+                required: true,
+                autofocus: true ,
+                input_html: { autocomplete: "first name" }%>
+    <%= f.input :last_name,
+                required: true,
+                autofocus: true ,
+                input_html: { autocomplete: "last name" }%>
     <%= f.input :email,
                 required: true,
                 autofocus: true ,
                 input_html: { autocomplete: "email" }%>
+    <p>
+      <%= f.input :avatar %>
+      <%= image_tag(resource.avatar_url, :style => 'display: inline;') if resource.avatar? %>
+      <%= f.input :avatar_cache, as: :hidden %>
+    </p>
     <%= f.input :password,
                 required: true,
                 hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
@@ -21,5 +34,3 @@
     <%= f.button :submit, "Sign up", class: 'btn btn-primary' %>
   </div>
 <% end %>
-<br>
-  <%= render "devise/shared/links" %>

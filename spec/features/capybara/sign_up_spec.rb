@@ -9,6 +9,8 @@ describe 'Sign up' do
     click_link 'Sign up'
     expect(page).to have_current_path('/users/sign_up')
     fill_in 'Email', with: 'user@example.com'
+    fill_in 'First name', with: 'John'
+    fill_in 'Last name', with: 'Smith'
     fill_in 'user_password', with: 'password'
     fill_in 'user_password_confirmation', with: 'password'
     click_button 'Sign up'

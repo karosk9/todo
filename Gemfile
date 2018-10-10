@@ -6,10 +6,12 @@ git_source(:github) do |repo_name|
 end
 
 gem 'bootstrap', '~> 4.1', '>= 4.1.3'
+gem 'carrierwave', '~> 1.0'
 gem 'devise', '~> 4.5'
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
+gem 'mini_magick'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.6'
@@ -48,6 +50,7 @@ group :development, :test do
   gem 'faker', :git => 'https://github.com/stympy/faker.git', :branch => 'master'
   gem 'chromedriver-helper'
   gem 'pry-byebug'
+  gem 'pry-rails'
   gem 'rspec-rails', '~> 3.4', '>= 3.4.2'
   gem 'selenium-webdriver'
   gem 'site_prism', '~> 2.9'
