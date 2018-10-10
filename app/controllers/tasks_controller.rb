@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :provide_task, only: [:edit, :update, :destroy, :done, :undone]
 
   def index
-    @tasks = current_user.tasks.order(created_at: :desc)
+    @tasks = current_user.tasks.order(created_at: :desc).page params[:page]
   end
 
   def new
@@ -48,7 +48,29 @@ class TasksController < ApplicationController
     redirect_to root_path
   end
 
+  def update_selected
+    @tasks = Task.find(params[:task_ids])
+    finish_selected if params[:finish]
+    remove_selected if params[:remove]
+    redirect_to tasks_path
+  end
+
   private
+  def finish_selected
+    @tasks.each do |task|
+      next if task.completed?
+      task.completed = true
+      task.finished_at = DateTime.now
+      task.save!
+    end
+    flash[:notice] = "Updated tasks!"
+  end
+
+  def remove_selected
+    removed = @tasks.each(&:delete)
+    flash[:notice] = "Deleted tasks: #{removed.count}"
+  end
+
   def task_params
     params.require(:task).permit(:title, :content, :completed, :deadline).merge(user: current_user)
   end

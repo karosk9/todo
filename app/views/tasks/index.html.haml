@@ -1,6 +1,6 @@
 -@title='Todo list'
 %br
-  =link_to 'New', new_task_path, id: 'new_task', class: 'btn btn-primary'
+  =link_to 'New', new_task_path, id: 'new_link', class: 'btn btn-primary'
 %br
 %hr
 %h4
@@ -10,26 +10,33 @@
   Done:
   = already_done_tasks
 %br
-%table.table.table-hover
-  %thead-light
-    %tr
-      %th{:scope => "col"} Nr
-      %th{:scope => "col"} Title
-      %th{:scope => "col"} Content
-      %th{:scope => "col"} Completed
-      %th{:scope => "col"} Created at
-      %th{:scope => "col"} Deadline
-      %th{:scope => "col"} Finished
+=paginate @tasks, class: 'btn btn-primary'
 
-      %th{:scope => "col"} Actions
-  %tbody{id: 'tasks'}
-    -@tasks.each_with_index do |task, index|
-      %tr{id: "task_#{task.id}"}
-        %td= index+1
-        %td{class: 'title'}= task.title
-        %td= task.content
-        %td= done(task)
-        %td= created(task)
-        %td= deadline_time(task)
-        %td= finish_time(task)
-        %td= render 'actions', model: task
+= form_tag tasks_update_selected_path do
+  =submit_tag 'Finish selected', name: 'finish', class: 'btn btn-success'
+  =submit_tag 'Remove selected', name: 'remove', class: 'btn btn-danger'
+  %table.table.table-hover
+    %thead-light
+      %tr
+        %th{:scope => "col"}= check_box_tag 'select/unselect all', 0, false, id: 'selectAll'
+        %th{:scope => "col"} Nr
+        %th{:scope => "col"} Title
+        %th{:scope => "col"} Content
+        %th{:scope => "col"} Completed
+        %th{:scope => "col"} Created at
+        %th{:scope => "col"} Deadline
+        %th{:scope => "col"} Finished
+
+        %th{:scope => "col"} Actions
+    %tbody{id: 'tasks'}
+      -@tasks.each_with_index do |task, index|
+        %tr{id: "task_#{task.id}"}
+          %td= check_box_tag 'task_ids[]', task.id, false, class: 'selectable'
+          %td= index+1
+          %td{class: 'title'}= task.title
+          %td= task.content
+          %td= done(task)
+          %td= created(task)
+          %td= deadline_time(task)
+          %td= finish_time(task)
+          %td= render 'actions', model: task
