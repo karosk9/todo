@@ -98,6 +98,8 @@ GEM
       activerecord (>= 4.0)
       activesupport (>= 4.0)
     database_cleaner (1.7.0)
+    decent_decoration (0.1.0)
+      decent_exposure (~> 3.0)
     decent_exposure (3.0.0)
       activesupport (>= 4.0)
     devise (4.5.0)
@@ -317,6 +319,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   crono
   database_cleaner
+  decent_decoration (~> 0.1.0)
   decent_exposure (= 3.0.0)
   devise (~> 4.5)
   draper
