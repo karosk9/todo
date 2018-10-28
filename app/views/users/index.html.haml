@@ -1,0 +1,17 @@
+-@title='Users'
+%br
+%hr
+%h4
+%table.table.table-hover
+  %thead-light
+    %tr
+      %th{:scope => "col"} Avatar
+      %th{:scope => "col"} Name
+      %th{:scope => "col"} Email
+  %tbody{id: 'users'}
+    -users.each_with_index do |user, index|
+      %tr{id: "user_#{user.id}"}
+        %td= index+1
+        %td= user.profile_image_small
+        %td= link_to user.full_name, user_path(user)
+        %td= user.email
