@@ -23,7 +23,7 @@ describe 'Authentication' do
         fill_in 'Email', with: user.email
         fill_in 'Password', with: user.password
         click_button 'Log in'
-        expect(page).to have_current_path("/users/edit.#{user.id}")
+        expect(page).to have_current_path("/my/users/edit.#{user.id}")
         expect(page).to have_content('Log out')
         expect(page).to have_selector('#flash_success', text: 'Logged in successfully.')
         expect(page).to have_content('Incognito user')

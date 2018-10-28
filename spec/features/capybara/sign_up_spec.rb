@@ -5,9 +5,9 @@ describe 'Sign up' do
 
   it 'user sets up an account' do
     visit '/'
-    expect(page).to have_current_path('/users/login')
+    expect(page).to have_current_path('/my/users/login')
     click_link 'Sign up'
-    expect(page).to have_current_path('/users/sign_up')
+    expect(page).to have_current_path('/my/users/sign_up')
     fill_in 'Email', with: 'user@example.com'
     fill_in 'First name', with: 'John'
     fill_in 'Last name', with: 'Smith'
