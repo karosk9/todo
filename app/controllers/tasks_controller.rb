@@ -5,7 +5,6 @@ class TasksController < ApplicationController
   def create
     if task.save
       redirect_to root_path, notice: 'Task was successfully created'
-      set_title_if_not_present
     else
       render :new
     end
@@ -60,7 +59,5 @@ class TasksController < ApplicationController
     params.require(:task).permit(:title, :content, :completed, :deadline).merge(user: current_user)
   end
 
-  def set_title_if_not_present
-    task.update!(title: 'Unnamed task') unless task.title?
   end
 end
