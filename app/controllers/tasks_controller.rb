@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  expose :tasks, ->{ current_user.tasks.order(created_at: :desc).page params[:page] }
+  expose :tasks, -> { TaskDecorator.decorate_collection(user_tasks) }
   expose :task
 
   def create
