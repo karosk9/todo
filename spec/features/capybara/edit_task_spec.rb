@@ -12,9 +12,9 @@ describe 'Edit task' do
     end
 
     it 'user can edit task' do
-      visit ('/')
+      visit '/'
       expect(page).to have_content(task.title)
-      click_on ('Edit')
+      click_on 'Edit'
       expect(page).to have_current_path("/tasks/#{task.id}/edit")
       expect(find_field('Title').value).to eq task.title
       fill_in 'Title', with: 'Do something else'

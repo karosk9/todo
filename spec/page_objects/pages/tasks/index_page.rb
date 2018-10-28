@@ -6,15 +6,14 @@ class IndexPage < SitePrism::Page
   elements :tasks, 'tbody#tasks td.title'
   element :success_message, 'div#flash_success'
   element :new_task_button, 'a#new_task'
-  element :edit_task_button, "a.edit_task"
-  element :delete_task_button, "a.delete_task"
-  element :done_task_button, "a.done"
-  element :restore_task_button, "a.restore"
+  element :edit_task_button, 'a.edit_task'
+  element :delete_task_button, 'a.delete_task'
+  element :done_task_button, 'a.done'
+  element :restore_task_button, 'a.restore'
 
   expected_elements :new_task_button,
                     :edit_task_button,
                     :delete_task_button
-
 
   def create(title)
     new_task_button.click
@@ -44,6 +43,5 @@ class IndexPage < SitePrism::Page
     success_message.text
   end
 
-  def count
-  end
+  def count; end
 end

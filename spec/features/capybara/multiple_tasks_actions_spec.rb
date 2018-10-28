@@ -6,7 +6,7 @@ describe 'finish all' do
 
   before(:each) do
     login_as(user)
-    visit ('/')
+    visit '/'
   end
 
   it 'displays common actions buttons' do

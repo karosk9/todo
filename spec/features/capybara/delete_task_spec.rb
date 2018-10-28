@@ -15,10 +15,10 @@ describe 'Delete task' do
 
     shared_examples 'user can delete task' do
       it 'acts correctly' do
-        visit ('/')
+        visit '/'
         expect(page).to have_content(task.title)
         expect(page).to_not have_content(task2.title)
-        click_on ('Delete')
+        click_on 'Delete'
         expect(page).to have_current_path('/')
         expect(page).to_not have_content(task.title)
       end

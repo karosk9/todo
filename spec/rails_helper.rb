@@ -1,9 +1,9 @@
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
-require File.expand_path('../../config/environment', __FILE__)
+require File.expand_path('../config/environment', __dir__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'capybara/rspec'
 require 'selenium/webdriver'
@@ -14,12 +14,12 @@ end
 
 Capybara.register_driver :headless_chrome do |app|
   capabilities = Selenium::WebDriver::Remote::Capabilities.chrome(
-    chromeOptions: { args: %w(headless disable-gpu) }
+    chromeOptions: { args: %w[headless disable-gpu] }
   )
 
   Capybara::Selenium::Driver.new app,
-    browser: :chrome,
-    desired_capabilities: capabilities
+                                 browser: :chrome,
+                                 desired_capabilities: capabilities
 end
 
 Capybara.javascript_driver = :headless_chrome
@@ -98,7 +98,7 @@ RSpec.configure do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  config.before(:each, :js => true) do
+  config.before(:each, js: true) do
     DatabaseCleaner.strategy = :truncation
   end
 
