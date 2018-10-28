@@ -15,6 +15,7 @@ gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'mini_magick'
+gem 'pundit'
 gem 'select_all-rails'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'sinatra', require: nil
