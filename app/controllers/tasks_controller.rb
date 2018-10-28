@@ -35,29 +35,39 @@ class TasksController < ApplicationController
 
   def update_selected
     return redirect_to tasks_path unless params[:task_ids].present?
-    @tasks = tasks.find(params[:task_ids])
-    finish_selected if params[:finish]
-    remove_selected if params[:remove]
+    return finish_selected if params[:finish]
+    return remove_selected if params[:remove]
+  end
+
+  def finish_selected
+    Task.transaction do
+      selected_tasks.each do |task|
+        next if task.completed?
+        task.update!(completed: true, finished_at: DateTime.now)
+      end
+      flash[:notice] = 'Updated tasks!'
+    end
+    redirect_to tasks_path
+  end
+
+  def remove_selected
+    removed = selected_tasks.each(&:delete)
+    flash[:notice] = "Deleted tasks: #{removed.count}"
     redirect_to tasks_path
   end
 
   private
-  def finish_selected
-    @tasks.each do |task|
-      next if task.completed?
-      task.update!(completed: true, finished_at: DateTime.now)
-    end
-    flash[:notice] = "Updated tasks!"
-  end
-
-  def remove_selected
-    removed = @tasks.each(&:delete)
-    flash[:notice] = "Deleted tasks: #{removed.count}"
-  end
 
   def task_params
     params.require(:task).permit(:title, :content, :completed, :deadline).merge(user: current_user)
   end
 
+  def user_tasks
+    current_user.tasks.order(created_at: :desc).page params[:page]
+  end
+
+  def selected_tasks
+    params[:task_ids].map!(&:to_i)
+    tasks.object.find(params[:task_ids])
   end
 end
