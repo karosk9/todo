@@ -4,11 +4,12 @@
 %br
 %hr
 %h4
+  -user = current_user&.decorate
   Total ToDo:
-  = total_todo
+  = user.total_todo
 %h4
   Done:
-  = already_done_tasks
+  = user.already_done_tasks
 %br
 =paginate tasks, class: 'btn btn-primary'
 

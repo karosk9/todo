@@ -1,5 +1,4 @@
 class UserMailer < ApplicationMailer
-  include UserHelper
   def daily_summary(user_id)
     @user = User.find(user_id)
     @user_tasks = @user.tasks
