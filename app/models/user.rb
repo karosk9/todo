@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :tasks
   has_many :assigned_tasks, foreign_key: 'assignee_id', class_name: 'Task'
 
-  enum role: { admin: 0, regular_user: 1 } 
+  enum role: { admin: 0, regular_user: 1 }
 
   def total_todo
     assigned_tasks.where(completed: false).count
