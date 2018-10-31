@@ -1,5 +1,6 @@
-=simple_form_for(task) do |f|
+=simple_form_for(task.decorate) do |f|
   =f.input :title, placeholder: 'Title'
   =f.input :content, placeholder: 'Content'
   =f.input :deadline
+  =f.association :assignee, label_method: :email, default: current_user.email
   =f.button :submit, id: 'create_task', class: 'btn btn-success'
