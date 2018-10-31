@@ -1,6 +1,8 @@
 class TaskDecorator < Draper::Decorator
   include Draper::LazyHelpers
   delegate_all
+  decorates_association :user
+  decorates_association :assignee
 
   def check_if_done
     if policy(task).manageable?

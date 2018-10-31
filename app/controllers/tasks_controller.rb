@@ -2,6 +2,10 @@ class TasksController < ApplicationController
   before_action :authorize_task_actions, only: [:update, :edit, :destroy]
   before_action :authorize_task_management, only: [:done, :undone, :finish_selected]
 
+  expose :tasks, -> { TaskDecorator.decorate_collection(Task.includes(:user, :assignee)
+                                                            .order(created_at: :desc)
+                                                            .page params[:page]
+                                                        )}
   expose :task
 
   def create
@@ -74,8 +78,6 @@ class TasksController < ApplicationController
     authorize task, :manageable?
   end
 
-  def user_tasks
-    current_user.tasks.order(created_at: :desc).page params[:page]
   def task_params
     params.require(:task).permit(:title, :content, :completed, :deadline, :assignee_id).merge(user: current_user)
   end
