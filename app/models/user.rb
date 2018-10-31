@@ -3,15 +3,16 @@ class User < ApplicationRecord
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
-  has_many :tasks, dependent: :destroy
+  has_many :tasks
+  has_many :assigned_tasks, foreign_key: 'assignee_id', class_name: 'Task'
 
   enum role: { admin: 0, regular_user: 1 } 
 
   def total_todo
-    tasks.where(completed: false).count
+    assigned_tasks.where(completed: false).count
   end
 
   def already_done_tasks
-    tasks.where(completed: true).count
+    assigned_tasks.where(completed: true).count
   end
 end
