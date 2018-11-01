@@ -17,6 +17,7 @@ gem 'kaminari'
 gem 'mini_magick'
 gem 'pundit'
 gem 'select_all-rails'
+gem 'sidekiq'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'sinatra', require: nil
 
