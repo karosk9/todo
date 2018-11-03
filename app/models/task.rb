@@ -11,6 +11,6 @@ class Task < ApplicationRecord
   private
 
   def set_assignee
-    self.assignee = self.user unless assignee.present?
+    self.assignee = user unless assignee.present?
   end
 end

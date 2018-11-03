@@ -6,7 +6,7 @@ Rails.application.routes.draw do
   post 'tasks/update_selected', to: 'tasks#update_selected'
   post 'tasks/finish_selected', to: 'tasks#finish_selected'
   post 'tasks/remove_selected', to: 'tasks#remove_selected'
-  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, :path_prefix => 'my'
+  devise_for :users, path_names: { sign_in: 'login', sign_out: 'logout' }, path_prefix: 'my'
   resources :users
 
   authenticate :user, ->(u) { u.admin? } do

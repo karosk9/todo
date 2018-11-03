@@ -1,12 +1,13 @@
 class TasksController < ApplicationController
-  before_action :authorize_task_actions, only: [:update, :edit, :destroy]
-  before_action :authorize_task_management, only: [:done, :undone, :finish_selected]
-  after_action :send_request, only: [:create, :done, :destroy, :update]
+  before_action :authorize_task_actions, only: %i[update edit destroy]
+  before_action :authorize_task_management, only: %i[done undone finish_selected]
+  after_action :send_request, only: %i[create done destroy update]
 
-  expose :tasks, -> { TaskDecorator.decorate_collection(Task.includes(:user, :assignee)
+  expose :tasks, -> {
+                   TaskDecorator.decorate_collection(Task.includes(:user, :assignee)
                                                             .order(created_at: :desc)
-                                                            .page params[:page]
-                                                        )}
+                                                            .page(params[:page]))
+                 }
   expose :task
 
   def create
