@@ -8,6 +8,8 @@ class User < ApplicationRecord
 
   enum role: { admin: 0, regular_user: 1 }
 
+  validates :email, email: true
+
   def total_todo
     assigned_tasks.where(completed: false).count
   end

@@ -6,6 +6,11 @@ GIT
     faker (1.9.1)
       i18n (>= 0.7)
 
+PATH
+  remote: vendor/gems/email_validator
+  specs:
+    email_validator (0.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -355,6 +360,7 @@ DEPENDENCIES
   decent_exposure (= 3.0.0)
   devise (~> 4.5)
   draper
+  email_validator!
   excon (~> 0.45.4)
   factory_bot_rails
   faker!
