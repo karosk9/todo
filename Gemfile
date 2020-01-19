@@ -11,12 +11,15 @@ gem 'crono'
 gem 'decent_exposure', '3.0.0'
 gem 'devise', '~> 4.5'
 gem 'draper'
+gem 'email_validator', path: 'vendor/gems/email_validator'
+gem 'excon', '~> 0.45.4'
 gem 'haml', '~> 5.0', '>= 5.0.4'
 gem 'jquery-rails'
 gem 'kaminari'
 gem 'mini_magick'
 gem 'pundit'
 gem 'select_all-rails'
+gem 'sidekiq'
 gem 'simple_form', '~> 4.0', '>= 4.0.1'
 gem 'sinatra', require: nil
 
@@ -67,6 +70,8 @@ group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'letter_opener'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rubocop', require: false
+  gem 'haml-lint', require: false
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'

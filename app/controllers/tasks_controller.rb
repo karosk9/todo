@@ -1,11 +1,13 @@
 class TasksController < ApplicationController
-  before_action :authorize_task_actions, only: [:update, :edit, :destroy]
-  before_action :authorize_task_management, only: [:done, :undone, :finish_selected]
+  before_action :authorize_task_actions, only: %i[update edit destroy]
+  before_action :authorize_task_management, only: %i[done undone finish_selected]
+  after_action :send_request, only: %i[create done destroy update]
 
-  expose :tasks, -> { TaskDecorator.decorate_collection(Task.includes(:user, :assignee)
+  expose :tasks, -> {
+                   TaskDecorator.decorate_collection(Task.includes(:user, :assignee)
                                                             .order(created_at: :desc)
-                                                            .page params[:page]
-                                                        )}
+                                                            .page(params[:page]))
+                 }
   expose :task
 
   def create
@@ -78,12 +80,18 @@ class TasksController < ApplicationController
     authorize task, :manageable?
   end
 
-  def task_params
-    params.require(:task).permit(:title, :content, :completed, :deadline, :assignee_id).merge(user: current_user)
-  end
-
   def selected_tasks
     params[:task_ids].map!(&:to_i)
     tasks.object.find(params[:task_ids])
+  end
+
+  def send_request
+    task_id = task.id
+    user_email = current_user.email
+    RequestWorker.perform_async(user_email, task_id)
+  end
+
+  def task_params
+    params.require(:task).permit(:title, :content, :completed, :deadline, :assignee_id).merge(user: current_user)
   end
 end
