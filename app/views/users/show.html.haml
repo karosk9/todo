@@ -1,11 +1,20 @@
 .h2
   User profile
+
 .p
+  -if policy(user).edit?
+    = link_to 'Edit profile', edit_user_path(user), class: 'btn btn-primary'
+.p
+  = user.profile_image
+  .br
   First name:
-  = @user.first_name
-.p
+  = user.first_name
+  .br
   Last name:
-  = @user.last_name
+  = user.last_name
 .p
   email:
-  = @user.email
+  = user.email
+.p
+  created:
+  = user.created_at

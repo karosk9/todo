@@ -3,6 +3,10 @@
   =link_to 'New', new_task_path, id: 'new_link', class: 'btn btn-primary', remote: true
 %br
 %hr
+-user = current_user&.decorate
+%h3
+  User:
+  =user.data
 %h4
   -user = current_user&.decorate
   Total ToDo:
@@ -23,11 +27,12 @@
         %th{:scope => "col"} Nr
         %th{:scope => "col"} Title
         %th{:scope => "col"} Content
+        %th{:scope => "col"} Created by
+        %th{:scope => "col"} Assignee
         %th{:scope => "col"} Completed
         %th{:scope => "col"} Created at
         %th{:scope => "col"} Deadline
         %th{:scope => "col"} Finished
-
         %th{:scope => "col"} Actions
     %tbody{id: 'tasks'}
       -tasks.each_with_index do |task, index|
@@ -36,8 +41,10 @@
           %td= index+1
           %td{class: 'title'}= task.decorated_title
           %td= task.content
+          %td= task.user.data
+          %td= task.assignee.data
           %td= task.check_if_done
           %td= task.created
           %td= task.deadline_time
           %td= task.finish_time
-          %td= render 'actions', model: task
+          %td= task.actions
