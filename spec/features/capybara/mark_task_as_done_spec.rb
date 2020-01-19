@@ -12,9 +12,9 @@ describe 'Mark task as done' do
     end
 
     it 'allows user to mark task as done' do
-      visit ('/')
+      visit '/'
       expect(page).to have_link('Done!')
-      click_on ('Done')
+      click_on 'Done'
       expect(page).to have_current_path('/')
       expect(page).to have_content('Restore')
       expect(page).to_not have_content('Done!')
@@ -24,9 +24,9 @@ describe 'Mark task as done' do
       let(:task) { create(:task, user: user, completed: true) }
 
       it "allows user to marks task as 'todo' again" do
-        visit ('/')
+        visit '/'
         expect(page).to have_link('Restore')
-        click_on ('Restore')
+        click_on 'Restore'
         expect(page).to have_current_path('/')
         expect(page).to have_content('Done!')
         expect(page).to_not have_content('Restore')

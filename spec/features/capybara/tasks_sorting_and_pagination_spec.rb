@@ -12,7 +12,7 @@ describe 'Sorting and pagination' do
 
   context 'first page' do
     it 'sorts tasks by the creation date and shows first 20' do
-      visit ('/')
+      visit '/'
       expect(page).to have_content('Total ToDo: 27')
       expect(page).to have_content('New task')
       expect(page).not_to have_content('Old task')
@@ -22,7 +22,7 @@ describe 'Sorting and pagination' do
 
   context 'second page' do
     it 'sorts tasks by the creation date and shows last 7' do
-      visit ('/')
+      visit '/'
       click_on 'Next ›'
       expect(page).to have_content('Total ToDo: 27')
       expect(page).not_to have_content('New task')

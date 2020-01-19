@@ -6,10 +6,9 @@ describe UserMailer, type: :mailer do
   let(:mail) { UserMailer.daily_summary(user.id) }
 
   describe 'daily summary' do
-
     it 'sets correct headers' do
       expect(mail.subject).to eq('Daily summary')
-      expect(mail.to).to eq(["#{user.email}"])
+      expect(mail.to).to eq([user.email.to_s])
       expect(mail.from).to eq(['todo@example.com'])
     end
 

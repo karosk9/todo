@@ -4,7 +4,7 @@ describe 'Edit Task', js: true do
   let(:index_page) { IndexPage.new }
   let(:user) { create(:user) }
   let(:title) { 'Buy some carrots' }
-  let(:new_title) { 'Buy carrots and onions'}
+  let(:new_title) { 'Buy carrots and onions' }
 
   before do
     login_as(user)

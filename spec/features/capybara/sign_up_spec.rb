@@ -4,7 +4,7 @@ describe 'Sign up' do
   include_examples 'not authenticated'
 
   it 'user sets up an account' do
-    visit ('/')
+    visit '/'
     expect(page).to have_current_path('/users/login')
     click_link 'Sign up'
     expect(page).to have_current_path('/users/sign_up')

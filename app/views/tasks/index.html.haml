@@ -4,11 +4,12 @@
 %br
 %hr
 %h4
+  -user = current_user&.decorate
   Total ToDo:
-  = total_todo
+  = user.total_todo
 %h4
   Done:
-  = already_done_tasks
+  = user.already_done_tasks
 %br
 =paginate tasks, class: 'btn btn-primary'
 
@@ -33,10 +34,10 @@
         %tr{id: "task_#{task.id}"}
           %td= check_box_tag 'task_ids[]', task.id, false, class: 'selectable'
           %td= index+1
-          %td{class: 'title'}= task.title
+          %td{class: 'title'}= task.decorated_title
           %td= task.content
-          %td= done(task)
-          %td= created(task)
-          %td= deadline_time(task)
-          %td= finish_time(task)
+          %td= task.check_if_done
+          %td= task.created
+          %td= task.deadline_time
+          %td= task.finish_time
           %td= render 'actions', model: task

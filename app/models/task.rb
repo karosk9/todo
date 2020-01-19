@@ -3,5 +3,5 @@ class Task < ApplicationRecord
 
   paginates_per 20
 
-  scope :done_yesterday, -> { where("Date(finished_at) = ?", 'yesterday') }
+  scope :done_yesterday, -> { where('Date(finished_at) = ?', 'yesterday') }
 end
