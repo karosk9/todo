@@ -1,5 +1,11 @@
 class TasksController < ApplicationController
-  expose :tasks, -> { TaskDecorator.decorate_collection(user_tasks) }
+  before_action :authorize_task_actions, only: [:update, :edit, :destroy]
+  before_action :authorize_task_management, only: [:done, :undone, :finish_selected]
+
+  expose :tasks, -> { TaskDecorator.decorate_collection(Task.includes(:user, :assignee)
+                                                            .order(created_at: :desc)
+                                                            .page params[:page]
+                                                        )}
   expose :task
 
   def create
@@ -42,6 +48,7 @@ class TasksController < ApplicationController
   def finish_selected
     Task.transaction do
       selected_tasks.each do |task|
+        authorize task, :manageable?
         next if task.completed?
         task.update!(completed: true, finished_at: DateTime.now)
       end
@@ -51,19 +58,28 @@ class TasksController < ApplicationController
   end
 
   def remove_selected
-    removed = selected_tasks.each(&:delete)
-    flash[:notice] = "Deleted tasks: #{removed.count}"
+    Task.transaction do
+      removed = selected_tasks.each do |task|
+        authorize task, :actionable?
+        task.destroy
+      end
+      flash[:notice] = "Deleted tasks: #{removed.count}"
+    end
     redirect_to tasks_path
   end
 
   private
 
-  def task_params
-    params.require(:task).permit(:title, :content, :completed, :deadline).merge(user: current_user)
+  def authorize_task_actions
+    authorize task, :actionable?
   end
 
-  def user_tasks
-    current_user.tasks.order(created_at: :desc).page params[:page]
+  def authorize_task_management
+    authorize task, :manageable?
+  end
+
+  def task_params
+    params.require(:task).permit(:title, :content, :completed, :deadline, :assignee_id).merge(user: current_user)
   end
 
   def selected_tasks

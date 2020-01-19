@@ -17,4 +17,8 @@ class UserDecorator < Draper::Decorator
     return '' unless avatar.present?
     image_tag(avatar, size: 300)
   end
+
+  def data
+    full_name == 'Incognito user' ? email : full_name
+  end
 end
