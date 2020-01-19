@@ -8,6 +8,7 @@
   User:
   =user.data
 %h4
+  -user = current_user&.decorate
   Total ToDo:
   = user.total_todo
 %h4

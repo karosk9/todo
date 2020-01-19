@@ -78,6 +78,8 @@ class TasksController < ApplicationController
     authorize task, :manageable?
   end
 
+  private
+
   def task_params
     params.require(:task).permit(:title, :content, :completed, :deadline, :assignee_id).merge(user: current_user)
   end
