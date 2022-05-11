@@ -17,7 +17,7 @@ gem 'kaminari'
 gem 'mini_magick'
 gem 'pundit'
 gem 'select_all-rails'
-gem 'simple_form', '~> 4.0', '>= 4.0.1'
+gem 'simple_form', '~> 5.0'
 gem 'sinatra', require: nil
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
